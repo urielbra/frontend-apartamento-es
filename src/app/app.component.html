@@ -1,0 +1,220 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="margin: 20px 0px auto; text-align: center;">
+    <img  src="../assets/logo.png" />
+</div>
+
+
+
+<div class="main-box">
+
+
+
+  <mat-tab-group>
+    <mat-tab>
+
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">home</mat-icon>
+        Casa
+      </ng-template>
+        <mat-card class="section"> <mat-icon style="margin: 0px 5px;">map</mat-icon>Localização</mat-card>
+
+
+        <mat-form-field *ngIf="!addMode" class="example-full-width nice-input">
+          <mat-label>Bairro</mat-label>
+          <mat-select [(value)]="house.place">
+            <mat-option *ngFor="let place of places" title="place.name" [value]="place.name" >
+              {{place.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="addMode" class="example-full-width nice-input">
+          <input matInput  placeholder="Nome do novo Bairro" [(ngModel)] = "house.place">
+        </mat-form-field>
+
+
+        <div *ngIf="!addMode" class="example-full-width nice-input wauto hiperlink">
+          <a (click)="addNeighboor()">
+            Não encontrou seu bairro? Adicione-o agora!
+          </a>
+        </div>
+
+
+        <mat-form-field class="example-full-width nice-input">
+          <input matInput  placeholder="Endereço" [(ngModel)] = "house.address">
+        </mat-form-field>
+
+        <mat-card class="section"> <mat-icon style="margin: 0px 5px;">description</mat-icon>Informações Gerais</mat-card>
+        <div class="gridSolution nice-input">
+          <mat-form-field class="example-full-width ">
+            <input matInput  placeholder="Quantidade de quartos" type="number" [(ngModel)] = "house.rooms">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input matInput  placeholder="Quantidade de suítes" type="number" [(ngModel)] = "house.suites">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input matInput  placeholder="Quantidade de salas de estar" type="number" [(ngModel)] = "house.dinning">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width ">
+              <input matInput  placeholder="Quantidade de vagas na garagem" type="number" [(ngModel)] = "house.garage">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input matInput type="number"  placeholder="Área (m²)" [(ngModel)] = "house.area">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Informações adicionais" [(ngModel)] = "house.extra">
+          </mat-form-field>
+    
+        </div>
+        
+        <mat-card class="section"> <mat-icon style="margin: 0px 5px;">info</mat-icon>Detalhes</mat-card>
+
+          <div class="check-div" >
+              <mat-checkbox [(ngModel)]="house.hasCloset">Possui armário inbutido?</mat-checkbox>
+          </div>
+
+          <mat-card class="section"> <mat-icon style="margin: 0px 5px;">attach_money</mat-icon>Valores</mat-card>
+
+          <mat-form-field class="example-full-width nice-input">
+              <input matInput  placeholder="Valor (R$)" type="number" [(ngModel)] = "house.value">
+          </mat-form-field>
+
+          
+          <div >
+
+            <button class="nice-input transition" [disabled]="!canFinish(true)" [ngClass]="{'disabled' : !canFinish(true)}" (click)="addPlace(true)" mat-stroked-button color="primary">Cadastrar!</button>
+          </div>
+   
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">location_city</mat-icon>
+        Apartamento
+      </ng-template>
+      <mat-card class="section"> <mat-icon style="margin: 0px 5px;">map</mat-icon>Localização</mat-card>
+
+
+        <mat-form-field *ngIf="!addMode" class="example-full-width nice-input">
+          <mat-label>Bairro</mat-label>
+          <mat-select [(value)]="flat.place">
+            <mat-option *ngFor="let place of places" title="place.name" [value]="place.name" >
+              {{place.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="addMode" class="example-full-width nice-input">
+          <input matInput  placeholder="Nome do novo Bairro" [(ngModel)] = "flat.place">
+        </mat-form-field>
+
+
+        <div *ngIf="!addMode" class="example-full-width nice-input wauto hiperlink">
+          <a (click)="addNeighboor()">
+            Não encontrou seu bairro? Adicione-o agora!
+          </a>
+        </div>
+
+
+        <mat-form-field class="example-full-width nice-input">
+          <input matInput  placeholder="Endereço" [(ngModel)] = "flat.address">
+        </mat-form-field>
+
+        <mat-card class="section"> <mat-icon style="margin: 0px 5px;">description</mat-icon>Informações Gerais</mat-card>
+     
+        <div class="gridSolution nice-input">
+          <mat-form-field class="example-full-width ">
+            <input matInput  placeholder="Quantidade de quartos" type="number" [(ngModel)] = "flat.rooms">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input matInput  placeholder="Quantidade de suítes" type="number" [(ngModel)] = "flat.suites">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input matInput  placeholder="Quantidade de salas de estar" type="number" [(ngModel)] = "flat.dinning">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width ">
+              <input matInput  placeholder="Quantidade de vagas na garagem" type="number" [(ngModel)] = "flat.garage">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input matInput  placeholder="Área (m²)" [(ngModel)] = "flat.area"> 
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Informações adicionais" [(ngModel)] = "flat.extra">
+          </mat-form-field>
+    
+        </div>
+
+      <mat-card class="section"> <mat-icon style="margin: 0px 5px;">info</mat-icon>Detalhes</mat-card>
+
+      <div class='gridSolution item-3 nice-input'>
+        <mat-form-field class="example-full-width ">
+            <input matInput  placeholder="Andar do apartamento" [(ngModel)] = "flat.floor">
+        </mat-form-field>
+        
+        <div class="check-div w100 noMargin align-center" >
+            <mat-checkbox [(ngModel)]="flat.hasLobby">Possui portaria 24 horas?</mat-checkbox>
+        </div>
+
+        <div class="check-div w100 noMargin align-center" >
+            <mat-checkbox [(ngModel)]="flat.hasCloset">Possui armário inbutido?</mat-checkbox>
+        </div>
+      </div>
+
+
+      <mat-card class="section"> <mat-icon style="margin: 0px 5px;">attach_money</mat-icon>Valores</mat-card>
+
+      <div class="gridSolution nice-input">
+      <mat-form-field class="example-full-width ">
+          <input matInput  placeholder="Valor (R$)" type="number" [(ngModel)] = "flat.value">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <input matInput  placeholder="Valor do condomínio (R$)" type="number" [(ngModel)] = "flat.condominiumValue">
+      </mat-form-field>
+      </div>
+      
+      <div >
+
+        <button class="nice-input transition" [disabled]="!canFinish(false)" [ngClass]="{'disabled' : !canFinish(false)}" (click)="addPlace(false)" mat-stroked-button color="primary">Cadastrar!</button>
+      </div>
+
+</mat-tab>
+  
+
+  </mat-tab-group>
+
+<router-outlet></router-outlet>
+
+<!--
+  
+  O sistema deverá considerar dois tipos de imóveis: casa e apartamento. Para os
+imóveis da categoria casa, as seguintes informações devem ser armazenadas: quantidade de
+quartos, quantidade de suítes, quantidade de salas de estar, número de vagas na garagem,
+área (em metros quadrados), se possui armário embutido e descrição (algum detalhe a mais
+que se deseja informar sobre a casa). Já para os imóveis da categoria apartamento, as
+seguintes informações devem ser armazenadas: quantidade de quartos, quantidade de suítes,
+quantidade de salas de estar, quantidade de salas de jantar, número de vagas na garagem,
+área (em metros quadrados), se possui armário embutido, descrição (algum detalhe a mais
+que se deseja informar sobre o apartamento), 
+
+andar, valor do condomínio e indicativo se o
+condomínio possui portaria 24 horas.
+
+Para cada imóvel cadastrado no sistema é importante saber o seu endereço completo,
+sendo necessário cadastrar o bairro no qual o imóvel está localizado. O usuário deverá
+selecionar o bairro dentre uma lista de bairros disponíveis. Caso o bairro ainda não estiver
+cadastrado no banco de dados o usuário deverá selecionar a opção “Outro” e digitar o nome
+do bairro em uma caixa de texto. Esta caixa de texto ficará desabilitada quando o bairro
+selecionado for diferente de “Outro”. Além disso, é obrigatório armazenar o valor de aluguel
+de cada imóvel. 
+  --->
